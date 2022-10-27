@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./components/Login";
 import "./App.css";
 import axios from 'axios'
+import Menu from "./components/Menu";
+
+
 
 function App() {
 
-
   const [login, setlogin] = useState("");
+  const [session, setSession] = useState("");
 
   console.log(`El valor de login  ⟢ ⊱⊱ ⟢ ${login}`);
 
@@ -14,13 +17,17 @@ function App() {
     return <Login login={login} setlogin={setlogin} />;
   };
 
+ 
   const menu = () => {
-    return "<h3>Hola<h3/>";
+    return <Menu />
+
   };
 
+
+
   return <div className="container">
-    {login==="" && loginContainer()}
-    {login!=="" && menu()}
+    {!window.sessionStorage.getItem('loggedAppUser') && loginContainer()}
+    {window.sessionStorage.getItem('loggedAppUser') && menu()}
     </div>;
 }
 
