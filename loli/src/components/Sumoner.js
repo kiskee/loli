@@ -14,12 +14,13 @@ const Sumoner = () => {
   const [summonerLevel, setSummonerLevel] = useState("");
   const [searchText, setSearchText] = useState("");
   const [region, setRegion] = useState("");
+  const [leaguePoints, setLeaguePoints] = useState("");
 
 
 
   function searchSumoner(event) {
     event.preventDefault();
-    const apiCall =
+    const callSumoner =
       "https://" +
       region +
       "/lol/summoner/v4/summoners/by-name/" +
@@ -27,8 +28,10 @@ const Sumoner = () => {
       "?api_key=" +
       tokenRiot;
 
+     
+
     axios
-      .get(apiCall)
+      .get(callSumoner)
       .then(function (response) {
         setId(response.data.id);
         setAccountId(response.data.accountId);
@@ -41,19 +44,45 @@ const Sumoner = () => {
       .catch(function (error) {
         console.log(error);
       });
+
+     
+
+      
   }
+
+ 
 
   function render() {
 
     const urlImg = 'http://ddragon.leagueoflegends.com/cdn/12.20.1/img/profileicon/'+profileIconId+'.png'
+    if(id){
+        const callLeague = 
+        "https://" +
+        region +
+        "/lol/league/v4/entries/by-summoner/" +
+        id +
+        "?api_key=" +
+        tokenRiot;
+    
+         //call to account
+         axios
+         .get(callLeague)
+         .then(function (response) {
+           setLeaguePoints(response.data[0].leaguePoints)
+          
+         })
+         .catch(function (error) {
+           console.log(error);
+         });  
+    }
 
     return (
-      <motion.div className="row mt-3" 
+      <motion.div className="row mt-3 mr-2 ml-1" 
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
       >
-
+        
         {/*}
         <ul className="list-group ">
           <li className="list-group-item bg-info text-white">Id:</li>
@@ -72,7 +101,7 @@ const Sumoner = () => {
           <li className="list-group-item ">{summonerLevel}</li>
         </ul>
     {*/}
-        <div className="card col-sm-3  align-items-center ml-3">
+        <div className="card col-sm-3  align-items-center">
           <h3 className="card-header">{name}</h3>
           <div className="card-body">
             <h5 className="card-title">LVL:</h5>
@@ -80,18 +109,18 @@ const Sumoner = () => {
           </div>
           <img src={urlImg} className="img-fluid rounded-top" alt="" height='100px' width='100px' />
         </div>
-        <div className="card col-sm-3 offset-1 align-items-left ml-3">
+        <div className="card col-sm-3  align-items-left ml-2">
           <h3 className="card-header">Basic Info:</h3>
           <div className="card-body">
             <h5 className="card-title">LVL:</h5>
             <h6 className="card-subtitle text-muted">{summonerLevel}</h6>
           </div>
         </div>
-        <div className="card col-sm-5 offset-1 align-items-left ml-3">
+        <div className="card col-sm-5    align-items-left ml-2">
           <h3 className="card-header">Basic Info:</h3>
           <div className="card-body">
-            <h5 className="card-title">LVL:</h5>
-            <h6 className="card-subtitle text-muted">{summonerLevel}</h6>
+            <h5 className="card-title">League Points:</h5>
+            <h6 className="card-subtitle text-muted">{leaguePoints}</h6>
           </div>
         </div>
       </motion.div>
