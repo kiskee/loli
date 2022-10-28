@@ -44,12 +44,17 @@ const Sumoner = () => {
   }
 
   function render() {
+
+    const urlImg = 'http://ddragon.leagueoflegends.com/cdn/12.20.1/img/profileicon/'+profileIconId+'.png'
+
     return (
-      <motion.div className="col-sm-6 offset-3 mt-3" 
+      <motion.div className="row mt-3" 
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
       >
+
+        {/*}
         <ul className="list-group ">
           <li className="list-group-item bg-info text-white">Id:</li>
           <li className="list-group-item ">{id}</li>
@@ -66,6 +71,29 @@ const Sumoner = () => {
           <li className="list-group-item bg-info text-white">summonerLevel:</li>
           <li className="list-group-item ">{summonerLevel}</li>
         </ul>
+    {*/}
+        <div className="card col-sm-3  align-items-center ml-3">
+          <h3 className="card-header">{name}</h3>
+          <div className="card-body">
+            <h5 className="card-title">LVL:</h5>
+            <h6 className="card-subtitle text-muted">{summonerLevel}</h6>
+          </div>
+          <img src={urlImg} className="img-fluid rounded-top" alt="" height='100px' width='100px' />
+        </div>
+        <div className="card col-sm-3 offset-1 align-items-left ml-3">
+          <h3 className="card-header">Basic Info:</h3>
+          <div className="card-body">
+            <h5 className="card-title">LVL:</h5>
+            <h6 className="card-subtitle text-muted">{summonerLevel}</h6>
+          </div>
+        </div>
+        <div className="card col-sm-5 offset-1 align-items-left ml-3">
+          <h3 className="card-header">Basic Info:</h3>
+          <div className="card-body">
+            <h5 className="card-title">LVL:</h5>
+            <h6 className="card-subtitle text-muted">{summonerLevel}</h6>
+          </div>
+        </div>
       </motion.div>
     );
   }
@@ -90,12 +118,13 @@ const Sumoner = () => {
 
   return (
     <motion.div 
-    className="container"
+    className=""
     initial={{ opacity: 0, scale: 0.5 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.8 }}
       
     >
+        <div className="container">
       <h1 className="text-danger">Sumoner Name</h1>
       <form className="col-sm-6 offset-3">
         <Select options={options} onChange={selectChange} />
@@ -118,7 +147,9 @@ const Sumoner = () => {
           Search
         </button>
       </form>
+      </div>
       {id.length > 0 && render()}
+      
     </motion.div>
   );
 };
