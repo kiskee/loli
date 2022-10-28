@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import "./App.css";
 import axios from 'axios'
 import Menu from "./components/Menu";
+import {motion} from 'framer-motion'
 
 
 
@@ -25,10 +26,14 @@ function App() {
 
 
 
-  return <div className="container">
+  return <motion.div className="container"
+  initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+  >
     {!window.sessionStorage.getItem('loggedAppUser') && loginContainer()}
     {window.sessionStorage.getItem('loggedAppUser') && menu()}
-    </div>;
+    </motion.div>;
 }
 
 export default App;

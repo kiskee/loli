@@ -1,12 +1,7 @@
 import {motion} from 'framer-motion'
 
 function Logout (){
-    const transitionValues = {
-        duration: 0.8,
-        yoyo: Infinity,
-        ease: "easeOut"
-      };
-
+  
  function destroy (){    
     return(
         window.sessionStorage.removeItem('loggedAppUser'),
@@ -23,7 +18,7 @@ function Logout (){
                 transition: { duration: 1 },
               }}
               whileTap={{ scale: 0.9 }}
-              whileInView={{ opacity: 1 }}
+              whileInView={{ opacity: 0.8 }}
    onClick={()=>destroy()} className="btn btn-danger ">Logout</motion.button>
           </div>
     )
