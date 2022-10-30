@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import md5 from "md5";
-import uniquid from 'uniqid'
-import Swal from 'sweetalert2'
+import uniquid from "uniqid";
+import Swal from "sweetalert2";
 
 function Login({ login, setlogin }) {
-  /////////////LOGIN//////////////////////////
+  /////////////LOGIN//////////////////////////CARLOSSSSSSSSSSSSSS
   //Hooks
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +41,7 @@ function Login({ login, setlogin }) {
     let create = document.querySelector(".create");
     create.getAttribute("style").search("none") > -1
       ? create.setAttribute("style", "display:block;")
-      : create.setAttribute("style", "display:none;")
+      : create.setAttribute("style", "display:none;");
   };
 
   /////////////CREATE//////////////////////////
@@ -50,44 +50,40 @@ function Login({ login, setlogin }) {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
-
-
   const user = {
     name: formValues.name,
     email: formValues.email,
     password: md5(formValues.password),
-    id: uniquid()
-}
+    id: uniquid(),
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  function adduser(e){
+  function adduser(e) {
     e.preventDefault();
-    setFormErrors(validate(formValues));  
-    setIsSubmit(true)  
-    
-}
-
-function save(){
-
-  if(Object.keys(formErrors).length === 0 && isSubmit){
-    axios.post('/api/usuario/adduser', user)
-  .then(
-   Swal.fire({
-    position: 'center',
-    icon: 'success',
-    title: 'User Created',
-    showConfirmButton: false
-  })          
-).then(window.location.reload())
+    setFormErrors(validate(formValues));
+      setIsSubmit(true);
   }
-  
-}
 
-  
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      axios
+        .post("/api/usuario/adduser", user)
+        .then(
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "User Created",
+            showConfirmButton: false,
+          })
+        )
+        .then(window.location.reload());
+    }
+  }, [isSubmit]);
+
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -107,7 +103,7 @@ function save(){
       errors.password = "Password cannot exceed more than 10 characters";
     }
     return errors;
-  }
+  };
 
   return (
     <>
@@ -160,7 +156,6 @@ function save(){
 
       {/* Create //////////////////////////////////////////////// */}
       <div className="container create" style={{ display: "none" }}>
-   
         <div className="row">
           <h2 className="mt-4 text-success">Create a new user</h2>
         </div>
@@ -191,7 +186,7 @@ function save(){
                 name="email"
                 placeholder="Email"
                 value={formValues.email}
-              onChange={handleChange}
+                onChange={handleChange}
               ></input>
             </div>
             <p className="text-danger">{formErrors.email}</p>
@@ -205,15 +200,16 @@ function save(){
                 name="password"
                 placeholder="Password"
                 value={formValues.password}
-              onChange={handleChange}
+                onChange={handleChange}
               ></input>
             </div>
             <p className="text-danger">{formErrors.password}</p>
-            <button className="btn btn-success" onClick={()=>save()}>Create</button>
+            <button className="btn btn-success">
+              Create
+            </button>
             <center>
-              
               <h6 className="mt-4">
-                <a className="text-white mt-4" href="#" onClick={() => mostrar()}>
+                <a className="text-white mt-4" href="#" onClick={()=>mostrar()}>
                   Go Back
                 </a>
               </h6>

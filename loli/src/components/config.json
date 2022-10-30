@@ -1,3 +1,6 @@
 {
-    "tokenRiot": "RGAPI-d44616c5-fd6c-4fbe-ad59-be82481e78b8"
+    "tokenRiot": "RGAPI-9e61a356-2ef2-4297-85ea-ee6274f3c96e",
+    "mongose":{
+        "DB" : "mongodb+srv://test:perragata27@cluster0.jdduep2.mongodb.net/test?retryWrites=true&w=majority"
+    }
 }
